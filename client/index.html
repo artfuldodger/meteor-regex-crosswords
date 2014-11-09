@@ -1,0 +1,42 @@
+<head>
+  <title>regex-crossword</title>
+</head>
+
+<body>
+  <h1>Solve the regex to solve</h1>
+
+  {{> crossword}}
+</body>
+
+<!-- GOF ORA KER -->
+
+<template name="crossword">
+  {{#with crossword}}
+    <table>
+      <thead>
+        <tr>
+          <th> </th>
+          {{#each columns}}
+            <th>{{this}}</th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each rows}}
+          <tr>
+            <th>{{this}}</th>
+            {{#each crossword.columns}}
+              <td><input></td>
+            {{/each}}
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    {{> submit}}
+  {{/with}}
+</template>
+
+<template name="submit">
+  <input type="submit" value="Validate!">
+</template>
