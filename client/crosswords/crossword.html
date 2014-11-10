@@ -1,17 +1,7 @@
-<head>
-  <title>regex-crossword</title>
-</head>
-
-<body>
-  <h1>Solve the regex to solve</h1>
-
-  {{> crossword}}
-</body>
-
-<!-- GOF ORA KER -->
-
 <template name="crossword">
-  {{#with crossword}}
+  <h1>Fill in according to the regexes</h1>
+
+  <form>
     <table>
       <thead>
         <tr>
@@ -33,10 +23,7 @@
       </tbody>
     </table>
 
-    {{> submit}}
-  {{/with}}
+    <input type="submit" value="Validate!">
+  </form>
 </template>
 
-<template name="submit">
-  <input type="submit" value="Validate!">
-</template>

@@ -1,0 +1,10 @@
+<template name="crosswords">
+  <h1>Pick a crossword to play</h1>
+
+  <ul>
+    {{#each crosswords}}
+      <li><a href="{{pathFor 'crossword'}}">{{name}}</a></li>
+    {{/each}}
+  </ul>
+</template>
+
