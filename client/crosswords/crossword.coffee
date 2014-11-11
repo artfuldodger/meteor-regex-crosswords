@@ -6,17 +6,16 @@ Template.crossword.helpers
   columns: ->
     @columns
 
-  rows: ->
-    _.map @rows, (row) =>
-      {
-        name: row,
-        columns: @columns
-      }
+  values: ->
+    @values
 
 Template.crossword.events
   'submit form': (event) ->
     $('input[type=submit]').attr('value', 'You clicking me, bro?')
     false
+
+  'blur input.value': (event) ->
+    console.log params
 
 Template.crosswordSubmit.events
   'click .add-column': (event) ->
@@ -33,6 +32,12 @@ Template.crosswordSubmit.events
       columns: _.map $('input[name="column"]'), (el) -> $(el).val()
       rows:    _.map $('input[name="row"]'), (el) -> $(el).val()
     }
+
+    post['values'] = _.map post.columns, (col) ->
+      [
+        _.map post.rows, (row) -> ''
+      ]
+
 
     post._id = Crosswords.insert(post)
 

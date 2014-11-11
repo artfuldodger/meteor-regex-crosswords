@@ -1,27 +1,30 @@
 <template name="crossword">
   <h1>Fill in according to the regexes</h1>
 
-  <form>
-    <table>
-      <thead>
-        <tr>
-          <th> </th>
-          {{#each columns}}
-            <th>{{this}}</th>
+  <form id="crossword" class="container">
+    <div id="columns">
+      <div class="column"> </div>
+      {{#each columns}}
+        <div class="column">{{this}}</div>
+      {{/each}}
+    </div>
+
+    <div id="rows">
+      {{#each rows}}
+        <div class="row">{{this}}</div>
+      {{/each}}
+    </div>
+
+    <div id="values">
+      {{#each values}}
+        <div class="value-row">
+          <div class="column"> </div>
+          {{#each this}}
+            <input type="text" value="{{this}}" class="value">
           {{/each}}
-        </tr>
-      </thead>
-      <tbody>
-        {{#each rows}}
-          <tr>
-            <th>{{name}}</th>
-            {{#each columns}}
-              <td><input></td>
-            {{/each}}
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+        </div>
+      {{/each}}
+    </div>
 
     <input type="submit" value="Validate!">
   </form>
