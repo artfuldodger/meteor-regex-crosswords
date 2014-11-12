@@ -45,10 +45,8 @@ Template.crosswordSubmit.events
       rows:    _.map $('input[name="row"]'), (el) -> $(el).val()
     }
 
-    post['values'] = _.map post.columns, (col) ->
-      [
-        _.map post.rows, (row) -> ''
-      ]
+    post['values'] = _.map post.rows, (row) ->
+      _.map post.columns, (col) -> ''
 
     post._id = Crosswords.insert(post)
 
