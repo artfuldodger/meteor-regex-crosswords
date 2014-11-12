@@ -11,11 +11,23 @@ Template.crossword.helpers
 
 Template.crossword.events
   'submit form': (event) ->
-    $('input[type=submit]').attr('value', 'You clicking me, bro?')
+    event.preventDefault()
+
+    crosswordId = @_id
+    # This seems to be saving data sanely - except when we lose an input somehow
+    # but often, when blurring one input, its value gets persisted but the value
+    # *appears* in it and its next neighbor, although it does not get persisted
+    # for the neighbor until another blur event is fired.
+    values = _.map $('.value-row'), (row) ->
+      _.map $(row).find('input'), (input) -> $(input).val()
+
+    Crosswords.update(crosswordId, { $set: { values: values } })
     false
 
   'blur input.value': (event) ->
-    console.log params
+    # why is `this` different here than with `submit form` event?
+    # console.log @_id
+    $('form').submit()
 
 Template.crosswordSubmit.events
   'click .add-column': (event) ->
@@ -37,7 +49,6 @@ Template.crosswordSubmit.events
       [
         _.map post.rows, (row) -> ''
       ]
-
 
     post._id = Crosswords.insert(post)
 
